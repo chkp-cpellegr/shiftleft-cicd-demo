@@ -33,8 +33,11 @@ jobs:
         run: echo This will be my ShiftLeft demo!
 
       # Runs a set of commands using the runners shell
-      - name: Run ShiftLeft Source Code Scan 
-             run: |
-                chmod +x ./shiftleft
-                git clone https://github.com/chkp-cpellegr/demo-app
-                ./shiftleft code-scan -s ./demo-app
+      - name: Run ShiftLeft Source Code Scan
+        env:
+           CHKP_CLOUDGUARD_ID: ${{ secrets.CHKP_CLOUDGUARD_ID }}
+           CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
+        run: |
+           chmod +x ./shiftleft
+           git clone https://github.com/chkp-cpellegr/demo-app
+           ./shiftleft code-scan -s ./demo-app
